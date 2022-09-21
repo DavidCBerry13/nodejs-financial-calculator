@@ -1,0 +1,81 @@
+extends layout
+
+block content
+  h1= title
+  
+  form(method='post' action='savings-calculator' novalidate)
+
+    // Principal
+    div(class='row mb-3 justify-content-md-center')
+      label(for='inputPrincipal' class='col-form-label col-sm-2') Principal
+      div(class='col-sm-2')
+        input(id='inputPrincipal' name='principal' type='number' class='form-control' min='1' value=formData.principal) 
+        
+    div(class='row mb-3 justify-content-md-center')
+      label(for='inputMonthlyDeposit' class='col-form-label col-sm-2') Monthly Deposit
+      div(class='col-sm-2')
+        input(id='inputMonthlyDeposit' name='monthlyDeposit' type='number' class='form-control' min='0' value=formData.monthlyDeposit)
+
+    // Interest rate
+    div(class='row mb-3 justify-content-md-center')
+      label(for='inputInterestRate' class='col-form-label col-sm-2') Annual Interest Rate
+      div(class='col-sm-2')
+        input(id='inputInterestRate' name='interestRate' type='number' class='form-control' min='0' max="20" value=formData.interestRate)
+
+    // Years
+    div(class='row mb-3 justify-content-md-center')
+      label(for='inputYears' class='col-form-label col-sm-2') Years
+      div(class='col-sm-2')
+        input(id='inputYears' name='years' type='number' class='form-control' min='1' max='40' step='1' value=formData.years)
+
+    div(class='row mb-3 justify-content-md-center')
+      div(class='col-sm-4 text-center')
+        input(type='submit' class='btn btn-primary m-3' value='Caclulate')
+        input(type='reset' class='btn btn-secondary m-3')
+
+  hr
+
+  if results 
+    h2 Results
+
+    h3 Savings Summary
+    div(class='row mb-3 justify-content-md-center')
+      table(class='table table-hover table-sm')
+        thead 
+          tr 
+            th(class='text-center fs-5') Principal 
+            th(class='text-center fs-5') Monthly Deposit
+            th(class='text-center fs-5') Total Deposits
+            th(class='text-center fs-5') Interest Rate
+            th(class='text-center fs-5') Years
+            th(class='text-center fs-5') Interest Earned
+            th(class='text-center fs-5') Ending Balance
+        tbody 
+          tr 
+            td(class='text-center fs-5')= results.summary.principal
+            td(class='text-center fs-5')= results.summary.monthlyDeposit
+            td(class='text-center fs-5')= results.summary.totalContributions
+            td(class='text-center fs-5')= results.summary.interestRate
+            td(class='text-center fs-5')= results.summary.years
+            td(class='text-center fs-5')= results.summary.interestEarned
+            td(class='text-center fs-5')= results.summary.endingBalance
+
+    h3 Yearly Breakdown
+    div(class='row mb-3 justify-content-md-center')
+    table(class='table table-hover table-sm')
+      thead 
+        tr 
+          th(class='text-center', scope="col") Year 
+          th(class='text-end', scope="col") Starting Balance
+          th(class='text-end', scope="col") Yearly Contributions
+          th(class='text-end', scope="col") Interest Earned
+          th(class='text-end', scope="col") Ending Balance
+      tbody 
+        each item in results.yearlyData
+          tr 
+            td(class='text-center')= item.year 
+            td(class='text-end')= item.startingBalance
+            td(class='text-end')= item.yearlyContributions 
+            td(class='text-end')= item.interestEarned 
+            td(class='text-end')= item.endingBalance
+

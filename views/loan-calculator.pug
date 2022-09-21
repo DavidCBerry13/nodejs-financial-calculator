@@ -1,0 +1,55 @@
+extends layout
+
+block content
+  h1= title
+
+  form(method='post' action='loan-calculator' novalidate)
+
+    // Principal
+    div(class='row mb-3 justify-content-md-center')
+      label(for='inputPrincipal' class='col-form-label col-sm-2') Principal (loan amount)
+      div(class='col-sm-2')
+        input(id='inputPrincipal' name='principal' class='form-control' placeholder="10,000" value=formData.principal) 
+        
+    // Interest rate
+    div(class='row mb-3 justify-content-md-center')
+      label(for='inputInterestRate' class='col-form-label col-sm-2') Interest Rate
+      div(class='col-sm-2')
+        input(id='inputInterestRate' name='interestRate' class='form-control' placeholder="7.5" value=formData.interestRate)
+
+    // Years
+    div(class='row mb-3 justify-content-md-center')
+      label(for='inputYears' class='col-form-label col-sm-2') Years
+      div(class='col-sm-2')
+        input(id='inputYears' name='years' class='form-control' placeholder="5" value=formData.years)
+
+    div(class='row mb-3 justify-content-md-center')
+      div(class='col-sm-4 text-center')
+        input(type='submit' class='btn btn-primary m-3' value='Caclulate')
+        input(type='reset' class='btn btn-secondary m-3')
+
+  hr
+
+
+  if results 
+    h2 Results
+
+    h3 Loan Summary
+    div(class='row mb-3 justify-content-md-center')
+      table(class='table table-hover table-sm')
+        thead 
+          tr 
+            th(class='text-center fs-5') Principal (loan amount)
+            th(class='text-center fs-5') Interest Rate
+            th(class='text-center fs-5') Years
+            th(class='text-center fs-5') Monthly Payment
+            th(class='text-center fs-5') Total Interest Paid
+            th(class='text-center fs-5') Total Amount Paid
+        tbody 
+          tr 
+            td(class='text-center fs-5')= results.summary.principal
+            td(class='text-center fs-5')= results.summary.interestRate
+            td(class='text-center fs-5')= results.summary.years
+            td(class='text-center fs-5')= results.summary.monthlyPayment
+            td(class='text-center fs-5')= results.summary.totalInterest
+            td(class='text-center fs-5')= results.summary.totalPayments
