@@ -11,8 +11,8 @@ block content
       div(class='col-sm-2')
         div(class='input-group has-validation')
           span(class='input-group-text' id='principalPrepend') $
-          input(id='inputPrincipal' name='principal' class='form-control' placeholder="10000" value=formData.principal required pattern='^\\d{1,8}$') 
-          div(class='invalid-feedback') Principal is required and must be between $1 and $10,000,000.
+          input(id='inputPrincipal' type='number' name='principal' class='form-control' placeholder="10000" min='500' max='5000000' step='any' value=formData.principal required) 
+          div(class='invalid-feedback') Principal is required and must be between $1 and $5,000,000.
             
 
     // Interest rate
@@ -20,16 +20,16 @@ block content
       label(for='inputInterestRate' class='col-form-label col-sm-2') Interest Rate
       div(class='col-sm-2')
         div(class='input-group has-validation')
-          input(id='inputInterestRate' name='interestRate' class='form-control' placeholder="7.5" value=formData.interestRate required pattern='[0-9]{1,2}\\.?\\d{0,3}')
+          input(id='inputInterestRate' type='number' name='interestRate' class='form-control' value=formData.interestRate min='0.25' max='20.0' step='any' required )
           span(class='input-group-text' id='interestRateAppend') %
-          div(class='invalid-feedback') Interest rate is required and must be a value between 0.1 and 29.99.
+          div(class='invalid-feedback') Interest rate is required and must be a value between 0.1 and 20.0.
             
 
     // Years
     div(class='row mb-3 justify-content-md-center')
       label(for='inputYears' class='col-form-label col-sm-2') Years
       div(class='col-sm-2')
-        input(id='inputYears' name='years' class='form-control' placeholder="5" value=formData.years required pattern='^([1-4]{1}[0-9]?)|(5)|(50)$')
+        input(id='inputYears' type='number' name='years' class='form-control' placeholder="5" value=formData.years min='1' max='50' step='1' required )
         div(class='invalid-feedback') Years are required and must be a value between 1 and 50.
             
 
