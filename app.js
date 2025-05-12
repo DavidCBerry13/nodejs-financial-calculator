@@ -3,12 +3,15 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var helmet = require('helmet');
 
 var indexRouter = require('./routes/index');
 var loanRouter = require('./routes/loan-calculator');
 var savingsRouter = require('./routes/savings-calculator');
 
 var app = express();
+
+app.use(helmet());  // Added so express does not return headers indicating we are using express
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
