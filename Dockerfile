@@ -1,5 +1,5 @@
 # Use the Alpine Linux distro with node.js installed
-FROM node:alpine
+FROM node:23.11.1-alpine3.21
 
 # Allow a port number we want the app to run on to be passed in.  use 8080 by default
 ARG port_number=8080
